@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #faf8ff;
+  color: #2a1a3d;
+}
+
+::selection {
+  background-color: #e9c46a;
+  color: #3d1a5c;
+}
+
+/* Slim gold scrollbar to echo the logo's glowing line motif */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f3edff;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9333ea, #e9c46a);
+  border-radius: 999px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full bg-brand-gradient
+      px-6 py-3 min-h-[44px] font-body font-bold text-white shadow-brand
+      transition-all duration-300 ease-out
+      hover:shadow-gold hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]
+      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold
+      disabled:opacity-50 disabled:pointer-events-none overflow-hidden;
+  }
+
+  .btn-primary::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent;
+    animation: shimmer-sweep 3s ease-in-out infinite;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-purple
+      px-6 py-3 min-h-[44px] font-body font-bold text-brand-purple bg-white/70
+      transition-all duration-300 ease-out
+      hover:bg-brand-purple hover:text-white hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97]
+      focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-purple;
+  }
+
+  .icon-btn {
+    @apply relative flex items-center justify-center w-11 h-11 rounded-full text-brand-purple
+      transition-all duration-200 ease-out hover:bg-brand-100 active:scale-90;
+  }
+
+  .gold-divider {
+    @apply relative h-px w-full;
+    background: linear-gradient(90deg, transparent, #e9c46a, transparent);
+  }
+
+  .card-surface {
+    @apply rounded-2xl bg-white/80 backdrop-blur-sm border border-brand-100 shadow-sm
+      transition-all duration-300 ease-out hover:shadow-brand hover:-translate-y-1;
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  60%,
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
